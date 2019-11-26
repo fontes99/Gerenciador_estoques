@@ -1,0 +1,10 @@
+{
+    "banana": {
+        "quantidade": 100.0,
+        "valor": 0.7
+    },
+    "ma\u00e7a": {
+        "quantidade": 500.0,
+        "valor": 2.0
+    }
+}
