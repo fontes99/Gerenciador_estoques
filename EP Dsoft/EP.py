@@ -1,16 +1,15 @@
 import json
 
-negativo = []
-
-with open ('memoria.txt','r') as arquivo:
-    conteudo = arquivo.read()
-    estoque = json.loads(conteudo) 
+arquivo = open('memoria.txt','r')
+conteudo = arquivo.read()
+estoque = json.loads(conteudo) 
+arquivo.close()
     
-i = 0 
+i = True
 
-while i == 0:
+while i:
     print('')
-    print('Controle de estoque')
+    print('\033[4m\033[95mControle de estoque:\033[0m')
     print('0 - sair')
     print('1 - adicionar item')
     print('2 - remover item')
@@ -21,7 +20,7 @@ while i == 0:
     
     
     
-# Escolha numero 1, adicionar item nao existente ************   FEITO   *******
+# Escolha numero 1, adicionar item nao existente 
     
     if escolha == '1':
         
@@ -36,7 +35,7 @@ while i == 0:
                 
                 
                 if Qinicial < 0:
-                    print('A quantidade inicial não pode ser negativa.')
+                    print('\033[91mA quantidade inicial não pode ser negativa.\033[0m')
                     
                 else:
                     a = False
@@ -47,25 +46,21 @@ while i == 0:
                 rs = float(input('Valor unitário do produto: '))   
                 
                 if rs < 0:
-                    print('O valor do produto não pode ser negativo.')
+                    print('\033[91mO valor do produto não pode ser negativo.\033[0m')
                     
                 else:
                     b = False
                     estoque[nome] = {'quantidade' : Qinicial, 'valor' : rs}
         
         else:
-            print('Produto ja cadastrado')
-        
-                
-        
-        with open ('memoria.txt','w') as arquivo:
-            conteudo = json.dumps(estoque, sort_keys=True, indent=4)
-            arquivo.write(conteudo)
+            print('\n\033[91mProduto ja cadastrado\033[0m')
 
+        arquivo = open('memoria.txt','w')
+        conteudo = json.dumps(estoque, sort_keys=True, indent=4)
+        arquivo.write(conteudo)
+        arquivo.close()
 
-
-
-# Escolha numero 2, remover item ****************************   FEITO   *******     
+# Escolha numero 2, remover item  
 
     elif escolha == '2':
         
@@ -73,17 +68,18 @@ while i == 0:
         nome = produto.lower()
         
         if nome not in estoque:
-            print('Elemento não encontrado')
+            print('\n\033[91mElemento não encontrado\033[0m')
         
         else:
             del estoque[nome]
             print('Elemento Removido')
 
-        with open ('memoria.txt','w') as arquivo:
-            conteudo = json.dumps(estoque, sort_keys=True, indent=4)
-            arquivo.write(conteudo)   
+        arquivo = open('memoria.txt','w')
+        conteudo = json.dumps(estoque, sort_keys=True, indent=4)
+        arquivo.write(conteudo)
+        arquivo.close()
             
-# Escolha numero 3, alterar item ****************************   FEITO   *******      
+# Escolha numero 3, alterar item   
 
     elif escolha == '3':
         
@@ -113,51 +109,50 @@ while i == 0:
                 print('Novo valor de {0} : {1}'.format(nome, estoque[nome]['valor']))
         
         else:
-            print('Elemento não encontrado')
-            
-        with open ('memoria.txt','w') as arquivo:
-            conteudo = json.dumps(estoque, sort_keys=True, indent=4)
-            arquivo.write(conteudo)
-        
-# Escolha numero 4, printar estoque *************************   FEITO   *******   
+            print('\n\033[91mElemento não encontrado\033[0m')
+
+        arquivo = open('memoria.txt','w')
+        conteudo = json.dumps(estoque, sort_keys=True, indent=4)
+        arquivo.write(conteudo)
+        arquivo.close()
+
+# Escolha numero 4, printar estoque    
 
     elif escolha == '4':
         
         soma = 0
         
         print('')
-        print('Estoques:')
+        print('\033[95mEstoques:\033[0m')
         for k in estoque:
             if estoque[k]['quantidade'] >= 0:
-                print(' -{0} : {1}'.format(k, estoque[k]['quantidade']))
+                print(' - {0} : {1}'.format(k, estoque[k]['quantidade']))
          
+        print('')
+        print('\033[95mEstoques negativos:\033[0m')
         for k in estoque:
             if estoque[k]['quantidade'] < 0:
-                    negativo.append(nome)
-                    
-        print('')
-        print('Estoques negativos:')
-        for j in negativo:
-            print(' -{0} : {1} '.format(j, estoque[j]['quantidade']))
+                print(' - {0} : {1} '.format(k, estoque[k]['quantidade']))
         
         for l in estoque:
             soma += estoque[l]['valor'] * estoque[l]['quantidade']
         
         print('')
-        print('Valor monetario: R${0}'.format(soma))
+        print(f'\033[94mValor monetario:\033[0m R${round(soma, 2)}')
                 
 
-# Escolha numero 0, Interromper programa ********************   FEITO   *******   
+# Escolha numero 0, Interromper programa
 
     elif escolha == '0':
-        i = 1
+        i = False
     
     else:
-        print('Escolha inválida')
+        print('\n\033[91mEscolha inválida\033[0m')
     
     
-with open ('memoria.txt','w') as arquivo:
-    conteudo = json.dumps(estoque, sort_keys=True, indent=4)
-    arquivo.write(conteudo)
+arquivo = open('memoria.txt','w')
+conteudo = json.dumps(estoque, sort_keys=True, indent=4)
+arquivo.write(conteudo)
+arquivo.close()
 
-print('Até mais')
+print('\n\033[1m\033[94mAté mais!\033[0m\n')

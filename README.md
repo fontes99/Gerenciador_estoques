@@ -1,2 +1,3 @@
 # Gerenciador_estoques
-software de gerenciamento de estoques
+
+Software de gerenciamento de estoques
