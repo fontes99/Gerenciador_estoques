@@ -1,6 +1,0 @@
-{
-    "banana": {
-        "quantidade": 15.0,
-        "valor": 0.75
-    }
-}
