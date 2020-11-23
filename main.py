@@ -1,6 +1,6 @@
 import json
 
-arquivo = open('memoria.txt','r')
+arquivo = open('memoria.json','r')
 conteudo = arquivo.read()
 estoque = json.loads(conteudo) 
 arquivo.close()
@@ -55,7 +55,7 @@ while i:
         else:
             print('\n\033[91mProduto ja cadastrado\033[0m')
 
-        arquivo = open('memoria.txt','w')
+        arquivo = open('memoria.json','w')
         conteudo = json.dumps(estoque, sort_keys=True, indent=4)
         arquivo.write(conteudo)
         arquivo.close()
@@ -74,7 +74,7 @@ while i:
             del estoque[nome]
             print('Elemento Removido')
 
-        arquivo = open('memoria.txt','w')
+        arquivo = open('memoria.json','w')
         conteudo = json.dumps(estoque, sort_keys=True, indent=4)
         arquivo.write(conteudo)
         arquivo.close()
@@ -111,7 +111,7 @@ while i:
         else:
             print('\n\033[91mElemento não encontrado\033[0m')
 
-        arquivo = open('memoria.txt','w')
+        arquivo = open('memoria.json','w')
         conteudo = json.dumps(estoque, sort_keys=True, indent=4)
         arquivo.write(conteudo)
         arquivo.close()
@@ -150,7 +150,7 @@ while i:
         print('\n\033[91mEscolha inválida\033[0m')
     
     
-arquivo = open('memoria.txt','w')
+arquivo = open('memoria.json','w')
 conteudo = json.dumps(estoque, sort_keys=True, indent=4)
 arquivo.write(conteudo)
 arquivo.close()
